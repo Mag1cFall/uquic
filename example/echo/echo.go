@@ -4,14 +4,14 @@ import (
 	"context"
 	"crypto/ed25519"
 	"crypto/rand"
-	tls "github.com/refraction-networking/utls" // [uQUIC]
+	tls "github.com/Mag1cFall/utls" // [uQUIC]
 	"crypto/x509"
 	"fmt"
 	"io"
 	"log"
 	"math/big"
 
-	"github.com/refraction-networking/uquic"
+	"github.com/Mag1cFall/uquic"
 )
 
 const addr = "localhost:4242"

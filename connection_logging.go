@@ -5,9 +5,9 @@ import (
 	"net/netip"
 	"slices"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/wire"
-	"github.com/refraction-networking/uquic/qlog"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/wire"
+	"github.com/Mag1cFall/uquic/qlog"
 )
 
 // ConvertFrame converts a wire.Frame into a logging.Frame.

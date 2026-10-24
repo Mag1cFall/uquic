@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/refraction-networking/uquic/internal/monotime"
-	"github.com/refraction-networking/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/monotime"
+	"github.com/Mag1cFall/uquic/internal/protocol"
 
 	"github.com/stretchr/testify/require"
 )

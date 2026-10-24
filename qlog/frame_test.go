@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/qerr"
-	"github.com/refraction-networking/uquic/qlogwriter/jsontext"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/qerr"
+	"github.com/Mag1cFall/uquic/qlogwriter/jsontext"
 
 	"github.com/stretchr/testify/require"
 )

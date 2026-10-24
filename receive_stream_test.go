@@ -8,11 +8,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/refraction-networking/uquic/internal/mocks"
-	"github.com/refraction-networking/uquic/internal/monotime"
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/synctest"
-	"github.com/refraction-networking/uquic/internal/wire"
+	"github.com/Mag1cFall/uquic/internal/mocks"
+	"github.com/Mag1cFall/uquic/internal/monotime"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/synctest"
+	"github.com/Mag1cFall/uquic/internal/wire"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

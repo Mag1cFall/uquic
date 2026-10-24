@@ -11,7 +11,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/refraction-networking/uquic/http3"
+	"github.com/Mag1cFall/uquic/http3"
 	"github.com/stretchr/testify/require"
 )
 

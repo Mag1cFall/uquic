@@ -6,9 +6,9 @@ import (
 	"log"
 	"testing"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/utils"
-	"github.com/refraction-networking/uquic/quicvarint"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/utils"
+	"github.com/Mag1cFall/uquic/quicvarint"
 )
 
 func encodeVarInt(i uint64) []byte {

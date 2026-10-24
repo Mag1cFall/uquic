@@ -5,20 +5,20 @@ import (
 	"errors"
 
 	// [uQUIC] use utls instead of stdlib crypto/tls for API compatibility with utls-based connections
-	tls "github.com/refraction-networking/utls"
+	tls "github.com/Mag1cFall/utls"
 	"fmt"
 	"net"
 	"strings"
 	"sync/atomic"
 	"time"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/qerr"
-	"github.com/refraction-networking/uquic/internal/utils"
-	"github.com/refraction-networking/uquic/internal/wire"
-	"github.com/refraction-networking/uquic/qlog"
-	"github.com/refraction-networking/uquic/qlogwriter"
-	"github.com/refraction-networking/uquic/quicvarint"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/qerr"
+	"github.com/Mag1cFall/uquic/internal/utils"
+	"github.com/Mag1cFall/uquic/internal/wire"
+	"github.com/Mag1cFall/uquic/qlog"
+	"github.com/Mag1cFall/uquic/qlogwriter"
+	"github.com/Mag1cFall/uquic/quicvarint"
 )
 
 type quicVersionContextKey struct{}

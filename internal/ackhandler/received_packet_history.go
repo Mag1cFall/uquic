@@ -4,7 +4,7 @@ import (
 	"iter"
 	"slices"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/protocol"
 )
 
 // interval is an interval from one PacketNumber to the other

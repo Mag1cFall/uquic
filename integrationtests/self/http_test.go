@@ -5,7 +5,7 @@ import (
 	"bytes"
 	"compress/gzip"
 	"context"
-	tls "github.com/refraction-networking/utls" // [uQUIC]
+	tls "github.com/Mag1cFall/utls" // [uQUIC]
 	"errors"
 	"fmt"
 	"io"
@@ -23,12 +23,12 @@ import (
 
 	"golang.org/x/sync/errgroup"
 
-	"github.com/refraction-networking/uquic"
-	"github.com/refraction-networking/uquic/http3"
-	"github.com/refraction-networking/uquic/http3/qlog"
-	quicproxy "github.com/refraction-networking/uquic/integrationtests/tools/proxy"
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/testutils/events"
+	"github.com/Mag1cFall/uquic"
+	"github.com/Mag1cFall/uquic/http3"
+	"github.com/Mag1cFall/uquic/http3/qlog"
+	quicproxy "github.com/Mag1cFall/uquic/integrationtests/tools/proxy"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/testutils/events"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

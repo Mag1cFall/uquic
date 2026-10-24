@@ -1,6 +1,6 @@
 package wire
 
-import "github.com/refraction-networking/uquic/internal/protocol"
+import "github.com/Mag1cFall/uquic/internal/protocol"
 
 type FrameType uint64
 

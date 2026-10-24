@@ -5,7 +5,7 @@ import (
 	"iter"
 	"slices"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/protocol"
 )
 
 const maxSkippedPackets = 4

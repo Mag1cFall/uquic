@@ -2,7 +2,7 @@ package self_test
 
 import (
 	"context"
-	tls "github.com/refraction-networking/utls" // [uQUIC]
+	tls "github.com/Mag1cFall/utls" // [uQUIC]
 	"crypto/x509"
 	"flag"
 	"fmt"
@@ -15,14 +15,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/refraction-networking/uquic"
-	"github.com/refraction-networking/uquic/http3"
-	"github.com/refraction-networking/uquic/integrationtests/tools"
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/wire"
-	"github.com/refraction-networking/uquic/qlog"
-	"github.com/refraction-networking/uquic/qlogwriter"
-	"github.com/refraction-networking/uquic/testutils/events"
+	"github.com/Mag1cFall/uquic"
+	"github.com/Mag1cFall/uquic/http3"
+	"github.com/Mag1cFall/uquic/integrationtests/tools"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/wire"
+	"github.com/Mag1cFall/uquic/qlog"
+	"github.com/Mag1cFall/uquic/qlogwriter"
+	"github.com/Mag1cFall/uquic/testutils/events"
 
 	"github.com/stretchr/testify/require"
 )

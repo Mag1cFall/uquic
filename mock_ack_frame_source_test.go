@@ -12,9 +12,9 @@ package quic
 import (
 	reflect "reflect"
 
-	monotime "github.com/refraction-networking/uquic/internal/monotime"
-	protocol "github.com/refraction-networking/uquic/internal/protocol"
-	wire "github.com/refraction-networking/uquic/internal/wire"
+	monotime "github.com/Mag1cFall/uquic/internal/monotime"
+	protocol "github.com/Mag1cFall/uquic/internal/protocol"
+	wire "github.com/Mag1cFall/uquic/internal/wire"
 	gomock "go.uber.org/mock/gomock"
 )
 

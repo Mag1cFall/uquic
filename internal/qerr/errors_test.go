@@ -6,7 +6,7 @@ import (
 	"net"
 	"testing"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/protocol"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

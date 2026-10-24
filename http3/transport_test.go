@@ -3,7 +3,7 @@ package http3
 import (
 	"bytes"
 	"context"
-	tls "github.com/refraction-networking/utls" // [uQUIC]
+	tls "github.com/Mag1cFall/utls" // [uQUIC]
 	"errors"
 	"fmt"
 	"io"
@@ -13,7 +13,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/refraction-networking/uquic"
+	"github.com/Mag1cFall/uquic"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

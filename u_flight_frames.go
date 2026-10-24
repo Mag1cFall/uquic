@@ -5,7 +5,7 @@ import (
 	"fmt"
 	mrand "math/rand"
 
-	"github.com/refraction-networking/uquic/quicvarint"
+	"github.com/Mag1cFall/uquic/quicvarint"
 )
 
 // QUICFlightFrameBuilder builds the frame payload of every Initial datagram in the

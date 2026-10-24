@@ -5,15 +5,15 @@ import (
 	"log"
 	"net"
 
-	tls "github.com/refraction-networking/utls"
+	tls "github.com/Mag1cFall/utls"
 
-	fuzzhandshake "github.com/refraction-networking/uquic/fuzzing/handshake"
-	"github.com/refraction-networking/uquic/fuzzing/internal/helper"
-	"github.com/refraction-networking/uquic/internal/handshake"
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/testdata"
-	"github.com/refraction-networking/uquic/internal/utils"
-	"github.com/refraction-networking/uquic/internal/wire"
+	fuzzhandshake "github.com/Mag1cFall/uquic/fuzzing/handshake"
+	"github.com/Mag1cFall/uquic/fuzzing/internal/helper"
+	"github.com/Mag1cFall/uquic/internal/handshake"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/testdata"
+	"github.com/Mag1cFall/uquic/internal/utils"
+	"github.com/Mag1cFall/uquic/internal/wire"
 )
 
 const alpn = "fuzz"

@@ -4,9 +4,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/refraction-networking/uquic/internal/synctest"
-	"github.com/refraction-networking/uquic/qlog"
-	"github.com/refraction-networking/uquic/qlogwriter"
+	"github.com/Mag1cFall/uquic/internal/synctest"
+	"github.com/Mag1cFall/uquic/qlog"
+	"github.com/Mag1cFall/uquic/qlogwriter"
 	"github.com/stretchr/testify/require"
 )
 

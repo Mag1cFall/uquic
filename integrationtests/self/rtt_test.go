@@ -9,11 +9,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/refraction-networking/uquic"
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/synctest"
-	"github.com/refraction-networking/uquic/qlogwriter"
-	"github.com/refraction-networking/uquic/testutils/simnet"
+	"github.com/Mag1cFall/uquic"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/synctest"
+	"github.com/Mag1cFall/uquic/qlogwriter"
+	"github.com/Mag1cFall/uquic/testutils/simnet"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

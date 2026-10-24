@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/refraction-networking/uquic/qlogwriter"
+	"github.com/Mag1cFall/uquic/qlogwriter"
 )
 
 // Event is a recorded event with the event time.

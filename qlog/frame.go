@@ -3,8 +3,8 @@ package qlog
 import (
 	"encoding/hex"
 
-	"github.com/refraction-networking/uquic/internal/wire"
-	"github.com/refraction-networking/uquic/qlogwriter/jsontext"
+	"github.com/Mag1cFall/uquic/internal/wire"
+	"github.com/Mag1cFall/uquic/qlogwriter/jsontext"
 )
 
 type Frame struct {

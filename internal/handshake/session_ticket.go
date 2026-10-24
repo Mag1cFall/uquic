@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/refraction-networking/uquic/internal/wire"
-	"github.com/refraction-networking/uquic/quicvarint"
+	"github.com/Mag1cFall/uquic/internal/wire"
+	"github.com/Mag1cFall/uquic/quicvarint"
 )
 
 const sessionTicketRevision = 5

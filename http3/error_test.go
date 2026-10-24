@@ -3,7 +3,7 @@ package http3
 import (
 	"testing"
 
-	quic "github.com/refraction-networking/uquic"
+	quic "github.com/Mag1cFall/uquic"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

@@ -5,7 +5,7 @@ import (
 	_ "crypto/sha256"
 	_ "crypto/sha512"
 	"crypto/rand"
-	tls "github.com/refraction-networking/utls" // [uQUIC]
+	tls "github.com/Mag1cFall/utls" // [uQUIC]
 	"testing"
 )
 

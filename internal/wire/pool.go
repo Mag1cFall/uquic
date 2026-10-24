@@ -3,7 +3,7 @@ package wire
 import (
 	"sync"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/protocol"
 )
 
 var pool sync.Pool

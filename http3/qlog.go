@@ -1,9 +1,9 @@
 package http3
 
 import (
-	"github.com/refraction-networking/uquic"
-	"github.com/refraction-networking/uquic/http3/qlog"
-	"github.com/refraction-networking/uquic/qlogwriter"
+	"github.com/Mag1cFall/uquic"
+	"github.com/Mag1cFall/uquic/http3/qlog"
+	"github.com/Mag1cFall/uquic/qlogwriter"
 
 	"github.com/quic-go/qpack"
 )

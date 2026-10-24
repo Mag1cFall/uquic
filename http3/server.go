@@ -3,7 +3,7 @@ package http3
 import (
 	"context"
 	// [uQUIC] use utls instead of crypto/tls for API compatibility
-	tls "github.com/refraction-networking/utls"
+	tls "github.com/Mag1cFall/utls"
 	"errors"
 	"fmt"
 	"io"
@@ -16,9 +16,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/refraction-networking/uquic"
-	"github.com/refraction-networking/uquic/http3/qlog"
-	"github.com/refraction-networking/uquic/qlogwriter"
+	"github.com/Mag1cFall/uquic"
+	"github.com/Mag1cFall/uquic/http3/qlog"
+	"github.com/Mag1cFall/uquic/qlogwriter"
 )
 
 // NextProtoH3 is the ALPN protocol negotiated during the TLS handshake, for QUIC v1 and v2.

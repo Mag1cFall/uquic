@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/refraction-networking/uquic/internal/flowcontrol"
-	"github.com/refraction-networking/uquic/internal/monotime"
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/qerr"
-	"github.com/refraction-networking/uquic/internal/wire"
+	"github.com/Mag1cFall/uquic/internal/flowcontrol"
+	"github.com/Mag1cFall/uquic/internal/monotime"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/qerr"
+	"github.com/Mag1cFall/uquic/internal/wire"
 )
 
 // StreamLimitReachedError is returned from Conn.OpenStream and Conn.OpenUniStream

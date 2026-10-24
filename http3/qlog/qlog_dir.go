@@ -3,9 +3,9 @@ package qlog
 import (
 	"context"
 
-	"github.com/refraction-networking/uquic"
-	"github.com/refraction-networking/uquic/qlog"
-	"github.com/refraction-networking/uquic/qlogwriter"
+	"github.com/Mag1cFall/uquic"
+	"github.com/Mag1cFall/uquic/qlog"
+	"github.com/Mag1cFall/uquic/qlogwriter"
 )
 
 const EventSchema = "urn:ietf:params:qlog:events:http3-12"

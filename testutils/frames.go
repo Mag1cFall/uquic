@@ -1,6 +1,6 @@
 package testutils
 
-import "github.com/refraction-networking/uquic/internal/wire"
+import "github.com/Mag1cFall/uquic/internal/wire"
 
 type (
 	Frame                   = wire.Frame

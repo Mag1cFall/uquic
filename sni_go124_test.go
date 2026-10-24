@@ -6,7 +6,7 @@ import (
 	"context"
 	"crypto/ecdh"
 	"crypto/rand"
-	tls "github.com/refraction-networking/utls" // [uQUIC]
+	tls "github.com/Mag1cFall/utls" // [uQUIC]
 	"encoding/binary"
 	"io"
 	mrand "math/rand/v2"
@@ -14,7 +14,7 @@ import (
 
 	"golang.org/x/crypto/cryptobyte"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/protocol"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

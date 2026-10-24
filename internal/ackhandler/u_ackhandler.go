@@ -1,9 +1,9 @@
 package ackhandler
 
 import (
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/utils"
-	"github.com/refraction-networking/uquic/qlogwriter"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/utils"
+	"github.com/Mag1cFall/uquic/qlogwriter"
 )
 
 // [UQUIC] NewUAckHandler creates a uSentPacketHandler that allows controlling the Initial

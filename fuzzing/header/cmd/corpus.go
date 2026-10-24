@@ -5,10 +5,10 @@ import (
 	"log"
 	mrand "math/rand/v2"
 
-	"github.com/refraction-networking/uquic/fuzzing/header"
-	"github.com/refraction-networking/uquic/fuzzing/internal/helper"
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/wire"
+	"github.com/Mag1cFall/uquic/fuzzing/header"
+	"github.com/Mag1cFall/uquic/fuzzing/internal/helper"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/wire"
 )
 
 const version = protocol.Version1

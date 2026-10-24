@@ -3,7 +3,7 @@ package quic
 import (
 	"crypto/rand"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/protocol"
 )
 
 // InitialPacketSpec describes everything about the QUIC Initial flight except the

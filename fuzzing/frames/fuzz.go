@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/refraction-networking/uquic/internal/ackhandler"
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/wire"
+	"github.com/Mag1cFall/uquic/internal/ackhandler"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/wire"
 )
 
 const version = protocol.Version1

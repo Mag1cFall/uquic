@@ -3,8 +3,8 @@ package qlog
 import (
 	"time"
 
-	"github.com/refraction-networking/uquic"
-	"github.com/refraction-networking/uquic/qlogwriter/jsontext"
+	"github.com/Mag1cFall/uquic"
+	"github.com/Mag1cFall/uquic/qlogwriter/jsontext"
 )
 
 type encoderHelper struct {

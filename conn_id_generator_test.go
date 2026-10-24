@@ -5,10 +5,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/refraction-networking/uquic/internal/monotime"
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/qerr"
-	"github.com/refraction-networking/uquic/internal/wire"
+	"github.com/Mag1cFall/uquic/internal/monotime"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/qerr"
+	"github.com/Mag1cFall/uquic/internal/wire"
 
 	"github.com/stretchr/testify/require"
 )

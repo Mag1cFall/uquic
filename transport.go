@@ -4,7 +4,7 @@ import (
 	"context"
 	"crypto/rand"
 	// [uQUIC] use utls instead of crypto/tls for API compatibility
-	tls "github.com/refraction-networking/utls"
+	tls "github.com/Mag1cFall/utls"
 	"errors"
 	"fmt"
 	"net"
@@ -12,11 +12,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/utils"
-	"github.com/refraction-networking/uquic/internal/wire"
-	"github.com/refraction-networking/uquic/qlog"
-	"github.com/refraction-networking/uquic/qlogwriter"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/utils"
+	"github.com/Mag1cFall/uquic/internal/wire"
+	"github.com/Mag1cFall/uquic/qlog"
+	"github.com/Mag1cFall/uquic/qlogwriter"
 )
 
 // ErrTransportClosed is returned by the [Transport]'s Listen or Dial method after it was closed.

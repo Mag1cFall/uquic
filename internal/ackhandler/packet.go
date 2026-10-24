@@ -3,8 +3,8 @@ package ackhandler
 import (
 	"sync"
 
-	"github.com/refraction-networking/uquic/internal/monotime"
-	"github.com/refraction-networking/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/monotime"
+	"github.com/Mag1cFall/uquic/internal/protocol"
 )
 
 type packetWithPacketNumber struct {

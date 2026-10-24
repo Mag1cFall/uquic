@@ -5,7 +5,7 @@ import (
 	"net"
 	"sync/atomic"
 
-	"github.com/refraction-networking/uquic/internal/utils"
+	"github.com/Mag1cFall/uquic/internal/utils"
 )
 
 // A closedLocalConn is a connection that we closed locally.

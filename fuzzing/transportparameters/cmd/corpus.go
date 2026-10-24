@@ -8,10 +8,10 @@ import (
 	"net/netip"
 	"time"
 
-	"github.com/refraction-networking/uquic/fuzzing/internal/helper"
-	"github.com/refraction-networking/uquic/fuzzing/transportparameters"
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/wire"
+	"github.com/Mag1cFall/uquic/fuzzing/internal/helper"
+	"github.com/Mag1cFall/uquic/fuzzing/transportparameters"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/wire"
 )
 
 func getRandomData(l int) []byte {

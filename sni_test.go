@@ -3,12 +3,12 @@ package quic
 import (
 	"context"
 	"crypto/rand"
-	tls "github.com/refraction-networking/utls" // [uQUIC]
+	tls "github.com/Mag1cFall/utls" // [uQUIC]
 	"io"
 	mrand "math/rand/v2"
 	"testing"
 
-	"github.com/refraction-networking/uquic/internal/testdata"
+	"github.com/Mag1cFall/uquic/internal/testdata"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/refraction-networking/clienthellod"
-	tls "github.com/refraction-networking/utls"
+	tls "github.com/Mag1cFall/utls"
 )
 
 const (

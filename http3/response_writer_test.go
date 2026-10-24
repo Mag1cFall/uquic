@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/refraction-networking/uquic"
-	"github.com/refraction-networking/uquic/http3/qlog"
-	"github.com/refraction-networking/uquic/testutils/events"
+	"github.com/Mag1cFall/uquic"
+	"github.com/Mag1cFall/uquic/http3/qlog"
+	"github.com/Mag1cFall/uquic/testutils/events"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

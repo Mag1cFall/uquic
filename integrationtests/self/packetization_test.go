@@ -9,12 +9,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/refraction-networking/uquic"
-	quicproxy "github.com/refraction-networking/uquic/integrationtests/tools/proxy"
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/qlog"
-	"github.com/refraction-networking/uquic/qlogwriter"
-	"github.com/refraction-networking/uquic/quicvarint"
+	"github.com/Mag1cFall/uquic"
+	quicproxy "github.com/Mag1cFall/uquic/integrationtests/tools/proxy"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/qlog"
+	"github.com/Mag1cFall/uquic/qlogwriter"
+	"github.com/Mag1cFall/uquic/quicvarint"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

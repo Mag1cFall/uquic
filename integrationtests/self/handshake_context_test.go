@@ -2,14 +2,14 @@ package self_test
 
 import (
 	"context"
-	tls "github.com/refraction-networking/utls" // [uQUIC]
+	tls "github.com/Mag1cFall/utls" // [uQUIC]
 	"errors"
 	"net"
 	"testing"
 	"time"
 
-	"github.com/refraction-networking/uquic"
-	"github.com/refraction-networking/uquic/qlogwriter"
+	"github.com/Mag1cFall/uquic"
+	"github.com/Mag1cFall/uquic/qlogwriter"
 
 	"github.com/stretchr/testify/require"
 )

@@ -9,7 +9,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/refraction-networking/uquic"
+	"github.com/Mag1cFall/uquic"
 )
 
 const NextProto = "hq-interop"

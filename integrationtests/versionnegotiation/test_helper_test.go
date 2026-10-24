@@ -2,14 +2,14 @@ package versionnegotiation
 
 import (
 	"context"
-	tls "github.com/refraction-networking/utls" // [uQUIC]
+	tls "github.com/Mag1cFall/utls" // [uQUIC]
 	"crypto/x509"
 	"flag"
 	"os"
 
-	"github.com/refraction-networking/uquic"
-	"github.com/refraction-networking/uquic/integrationtests/tools"
-	"github.com/refraction-networking/uquic/qlogwriter"
+	"github.com/Mag1cFall/uquic"
+	"github.com/Mag1cFall/uquic/integrationtests/tools"
+	"github.com/Mag1cFall/uquic/qlogwriter"
 )
 
 var (

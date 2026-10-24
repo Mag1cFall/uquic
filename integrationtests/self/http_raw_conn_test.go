@@ -10,10 +10,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/refraction-networking/uquic"
-	"github.com/refraction-networking/uquic/http3"
-	"github.com/refraction-networking/uquic/internal/synctest"
-	"github.com/refraction-networking/uquic/quicvarint"
+	"github.com/Mag1cFall/uquic"
+	"github.com/Mag1cFall/uquic/http3"
+	"github.com/Mag1cFall/uquic/internal/synctest"
+	"github.com/Mag1cFall/uquic/quicvarint"
 
 	"github.com/stretchr/testify/require"
 )

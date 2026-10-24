@@ -3,7 +3,7 @@ package congestion
 import (
 	"time"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/protocol"
 )
 
 // Bandwidth of a connection

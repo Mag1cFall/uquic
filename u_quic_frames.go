@@ -9,7 +9,7 @@ import (
 	mrand "math/rand"
 
 	"github.com/refraction-networking/clienthellod"
-	"github.com/refraction-networking/uquic/quicvarint"
+	"github.com/Mag1cFall/uquic/quicvarint"
 )
 
 // cryptoSafeRandUint64 draws a value from [min, max) with crypto/rand.

@@ -12,7 +12,7 @@ package ackhandler
 import (
 	reflect "reflect"
 
-	protocol "github.com/refraction-networking/uquic/internal/protocol"
+	protocol "github.com/Mag1cFall/uquic/internal/protocol"
 	gomock "go.uber.org/mock/gomock"
 )
 

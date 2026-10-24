@@ -3,15 +3,15 @@ package quic
 import (
 	"context"
 	// [uQUIC] use utls instead of crypto/tls for ConnectionState compatibility
-	tls "github.com/refraction-networking/utls"
+	tls "github.com/Mag1cFall/utls"
 	"errors"
 	"net"
 	"slices"
 	"time"
 
-	"github.com/refraction-networking/uquic/internal/handshake"
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/qlogwriter"
+	"github.com/Mag1cFall/uquic/internal/handshake"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/qlogwriter"
 )
 
 // The StreamID is the ID of a QUIC stream.

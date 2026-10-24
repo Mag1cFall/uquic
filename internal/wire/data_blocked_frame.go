@@ -1,8 +1,8 @@
 package wire
 
 import (
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/quicvarint"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/quicvarint"
 )
 
 // A DataBlockedFrame is a DATA_BLOCKED frame

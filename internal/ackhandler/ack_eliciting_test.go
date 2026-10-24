@@ -3,7 +3,7 @@ package ackhandler
 import (
 	"testing"
 
-	"github.com/refraction-networking/uquic/internal/wire"
+	"github.com/Mag1cFall/uquic/internal/wire"
 	"github.com/stretchr/testify/require"
 )
 

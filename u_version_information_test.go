@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/refraction-networking/clienthellod"
-	"github.com/refraction-networking/uquic/quicvarint"
-	tls "github.com/refraction-networking/utls"
+	"github.com/Mag1cFall/uquic/quicvarint"
+	tls "github.com/Mag1cFall/utls"
 )
 
 // wireVersionInformation dials with the spec and returns the chosen version followed by

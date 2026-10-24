@@ -10,10 +10,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/refraction-networking/uquic"
-	quicproxy "github.com/refraction-networking/uquic/integrationtests/tools/proxy"
-	"github.com/refraction-networking/uquic/qlog"
-	"github.com/refraction-networking/uquic/qlogwriter"
+	"github.com/Mag1cFall/uquic"
+	quicproxy "github.com/Mag1cFall/uquic/integrationtests/tools/proxy"
+	"github.com/Mag1cFall/uquic/qlog"
+	"github.com/Mag1cFall/uquic/qlogwriter"
 
 	"github.com/stretchr/testify/require"
 )

@@ -6,11 +6,11 @@ import (
 	"io"
 
 	// [uQUIC] use utls for ConnectionState compatibility
-	tls "github.com/refraction-networking/utls"
+	tls "github.com/Mag1cFall/utls"
 
-	"github.com/refraction-networking/uquic/internal/monotime"
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/wire"
+	"github.com/Mag1cFall/uquic/internal/monotime"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/wire"
 )
 
 var (

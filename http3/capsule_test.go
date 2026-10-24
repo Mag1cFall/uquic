@@ -5,7 +5,7 @@ import (
 	"io"
 	"testing"
 
-	"github.com/refraction-networking/uquic/quicvarint"
+	"github.com/Mag1cFall/uquic/quicvarint"
 
 	"github.com/stretchr/testify/require"
 )

@@ -1,6 +1,6 @@
 package ackhandler
 
-import "github.com/refraction-networking/uquic/internal/wire"
+import "github.com/Mag1cFall/uquic/internal/wire"
 
 // IsFrameTypeAckEliciting returns true if the frame is ack-eliciting.
 func IsFrameTypeAckEliciting(t wire.FrameType) bool {

@@ -3,7 +3,7 @@ package quic
 import (
 	"testing"
 
-	tls "github.com/refraction-networking/utls"
+	tls "github.com/Mag1cFall/utls"
 )
 
 // canonicalQTPs is a representative Chrome-like transport parameter list, in a

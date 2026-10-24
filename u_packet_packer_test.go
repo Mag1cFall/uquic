@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/wire"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/wire"
 )
 
 // uTestSealer is a no-op sealer: these tests only exercise packet sizing, so all that

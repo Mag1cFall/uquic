@@ -4,8 +4,8 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/wire"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/wire"
 
 	"github.com/stretchr/testify/require"
 )

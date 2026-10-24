@@ -5,8 +5,8 @@ import (
 	"net"
 	"testing"
 
-	"github.com/refraction-networking/uquic/internal/testdata"
-	tls "github.com/refraction-networking/utls"
+	"github.com/Mag1cFall/uquic/internal/testdata"
+	tls "github.com/Mag1cFall/utls"
 
 	"github.com/stretchr/testify/require"
 )

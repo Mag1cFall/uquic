@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/utils"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/utils"
 )
 
 // LogFrame logs a frame, either sent or received

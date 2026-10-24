@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/refraction-networking/uquic"
+	"github.com/Mag1cFall/uquic"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

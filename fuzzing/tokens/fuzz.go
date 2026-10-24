@@ -5,9 +5,9 @@ import (
 	"net"
 	"time"
 
-	"github.com/refraction-networking/uquic"
-	"github.com/refraction-networking/uquic/internal/handshake"
-	"github.com/refraction-networking/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic"
+	"github.com/Mag1cFall/uquic/internal/handshake"
+	"github.com/Mag1cFall/uquic/internal/protocol"
 )
 
 func Fuzz(data []byte) int {

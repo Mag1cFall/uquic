@@ -5,8 +5,8 @@ import (
 	"errors"
 	"net"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
-	tls "github.com/refraction-networking/utls"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	tls "github.com/Mag1cFall/utls"
 )
 
 // make it possible to mock connection ID for initial generation in the tests

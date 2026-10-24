@@ -1,8 +1,8 @@
 package qlog
 
 import (
-	"github.com/refraction-networking/uquic"
-	"github.com/refraction-networking/uquic/qlogwriter/jsontext"
+	"github.com/Mag1cFall/uquic"
+	"github.com/Mag1cFall/uquic/qlogwriter/jsontext"
 )
 
 // Frame represents an HTTP/3 frame.

@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/refraction-networking/uquic/qlogwriter/jsontext"
+	"github.com/Mag1cFall/uquic/qlogwriter/jsontext"
 )
 
 // Trace represents a qlog trace that can have multiple event producers.

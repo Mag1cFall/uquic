@@ -1,6 +1,6 @@
 package protocol
 
-import "github.com/refraction-networking/uquic/quicvarint"
+import "github.com/Mag1cFall/uquic/quicvarint"
 
 // StreamType encodes if this is a unidirectional or bidirectional stream
 type StreamType uint8

@@ -7,9 +7,9 @@ import (
 	"fmt"
 	"testing"
 
-	tls "github.com/refraction-networking/utls"
+	tls "github.com/Mag1cFall/utls"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/protocol"
 
 	"github.com/stretchr/testify/require"
 )

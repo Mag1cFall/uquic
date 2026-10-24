@@ -3,7 +3,7 @@ package protocol
 import (
 	"testing"
 
-	tls "github.com/refraction-networking/utls"
+	tls "github.com/Mag1cFall/utls"
 
 	"github.com/stretchr/testify/require"
 )

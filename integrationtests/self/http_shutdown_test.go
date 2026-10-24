@@ -2,7 +2,7 @@ package self_test
 
 import (
 	"context"
-	tls "github.com/refraction-networking/utls" // [uQUIC]
+	tls "github.com/Mag1cFall/utls" // [uQUIC]
 	"fmt"
 	"io"
 	"net"
@@ -11,9 +11,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/refraction-networking/uquic"
-	"github.com/refraction-networking/uquic/http3"
-	quicproxy "github.com/refraction-networking/uquic/integrationtests/tools/proxy"
+	"github.com/Mag1cFall/uquic"
+	"github.com/Mag1cFall/uquic/http3"
+	quicproxy "github.com/Mag1cFall/uquic/integrationtests/tools/proxy"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

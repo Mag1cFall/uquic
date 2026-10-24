@@ -6,7 +6,7 @@ import (
 	"os"
 	"sync"
 
-	quic "github.com/refraction-networking/uquic"
+	quic "github.com/Mag1cFall/uquic"
 )
 
 const streamDatagramQueueLen = 32

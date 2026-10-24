@@ -3,7 +3,7 @@ package wire
 import (
 	"io"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/protocol"
 )
 
 // A PathChallengeFrame is a PATH_CHALLENGE frame

@@ -12,8 +12,8 @@ package mocks
 import (
 	reflect "reflect"
 
-	monotime "github.com/refraction-networking/uquic/internal/monotime"
-	protocol "github.com/refraction-networking/uquic/internal/protocol"
+	monotime "github.com/Mag1cFall/uquic/internal/monotime"
+	protocol "github.com/Mag1cFall/uquic/internal/protocol"
 	gomock "go.uber.org/mock/gomock"
 )
 

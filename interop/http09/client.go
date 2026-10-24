@@ -2,7 +2,7 @@ package http09
 
 import (
 	"context"
-	tls "github.com/refraction-networking/utls" // [uQUIC]
+	tls "github.com/Mag1cFall/utls" // [uQUIC]
 	"errors"
 	"io"
 	"log"
@@ -13,7 +13,7 @@ import (
 
 	"golang.org/x/net/idna"
 
-	"github.com/refraction-networking/uquic"
+	"github.com/Mag1cFall/uquic"
 )
 
 // MethodGet0RTT allows a GET request to be sent using 0-RTT.

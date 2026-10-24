@@ -3,10 +3,10 @@ package quic
 import (
 	"fmt"
 
-	"github.com/refraction-networking/uquic/internal/ackhandler"
+	"github.com/Mag1cFall/uquic/internal/ackhandler"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/wire"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/wire"
 )
 
 type framesToRetransmit struct {

@@ -8,7 +8,7 @@ import (
 
 	"golang.org/x/sys/windows"
 
-	"github.com/refraction-networking/uquic/internal/utils"
+	"github.com/Mag1cFall/uquic/internal/utils"
 )
 
 const (

@@ -9,8 +9,8 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/refraction-networking/uquic/internal/utils"
-	"github.com/refraction-networking/uquic/qlogwriter"
+	"github.com/Mag1cFall/uquic/internal/utils"
+	"github.com/Mag1cFall/uquic/qlogwriter"
 )
 
 // EventSchema is the qlog event schema for QUIC

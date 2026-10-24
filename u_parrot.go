@@ -7,7 +7,7 @@ import (
 	"math/big"
 	mrand "math/rand"
 
-	tls "github.com/refraction-networking/utls"
+	tls "github.com/Mag1cFall/utls"
 )
 
 // QUICID names one built-in client fingerprint that QUICID2Spec can expand into a

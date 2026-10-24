@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/protocol"
 )
 
 // Instead of using an init function, the AEADs are created lazily.

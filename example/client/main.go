@@ -2,7 +2,7 @@ package main
 
 import (
 	"bytes"
-	tls "github.com/refraction-networking/utls" // [uQUIC]
+	tls "github.com/Mag1cFall/utls" // [uQUIC]
 	"crypto/x509"
 	"flag"
 	"io"
@@ -11,10 +11,10 @@ import (
 	"os"
 	"sync"
 
-	"github.com/refraction-networking/uquic"
-	"github.com/refraction-networking/uquic/http3"
-	"github.com/refraction-networking/uquic/http3/qlog"
-	"github.com/refraction-networking/uquic/internal/testdata"
+	"github.com/Mag1cFall/uquic"
+	"github.com/Mag1cFall/uquic/http3"
+	"github.com/Mag1cFall/uquic/http3/qlog"
+	"github.com/Mag1cFall/uquic/internal/testdata"
 )
 
 func main() {

@@ -8,11 +8,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/refraction-networking/uquic"
-	"github.com/refraction-networking/uquic/http3/qlog"
-	"github.com/refraction-networking/uquic/qlogwriter"
-	"github.com/refraction-networking/uquic/quicvarint"
-	"github.com/refraction-networking/uquic/testutils/events"
+	"github.com/Mag1cFall/uquic"
+	"github.com/Mag1cFall/uquic/http3/qlog"
+	"github.com/Mag1cFall/uquic/qlogwriter"
+	"github.com/Mag1cFall/uquic/quicvarint"
+	"github.com/Mag1cFall/uquic/testutils/events"
 
 	"github.com/stretchr/testify/require"
 )

@@ -12,8 +12,8 @@ import (
 	"time"
 
 	"github.com/quic-go/qpack"
-	"github.com/refraction-networking/uquic"
-	"github.com/refraction-networking/uquic/qlogwriter"
+	"github.com/Mag1cFall/uquic"
+	"github.com/Mag1cFall/uquic/qlogwriter"
 )
 
 // RawServerConn is an HTTP/3 server connection.

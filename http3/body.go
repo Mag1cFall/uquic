@@ -6,7 +6,7 @@ import (
 	"io"
 	"sync"
 
-	quic "github.com/refraction-networking/uquic"
+	quic "github.com/Mag1cFall/uquic"
 )
 
 // Settingser allows waiting for and retrieving the peer's HTTP/3 settings.

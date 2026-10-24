@@ -8,7 +8,7 @@ import (
 
 	"golang.org/x/sys/unix"
 
-	"github.com/refraction-networking/uquic/internal/utils"
+	"github.com/Mag1cFall/uquic/internal/utils"
 )
 
 func setDF(rawConn syscall.RawConn) (bool, error) {

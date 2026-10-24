@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/refraction-networking/uquic/internal/synctest"
+	"github.com/Mag1cFall/uquic/internal/synctest"
 
 	"github.com/stretchr/testify/require"
 )

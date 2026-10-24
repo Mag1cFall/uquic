@@ -3,7 +3,7 @@ package quic
 import (
 	"slices"
 
-	tls "github.com/refraction-networking/utls"
+	tls "github.com/Mag1cFall/utls"
 )
 
 const (

@@ -6,7 +6,7 @@ import (
 	"crypto"
 	"crypto/ed25519"
 	"crypto/rand"
-	tls "github.com/refraction-networking/utls" // [uQUIC]
+	tls "github.com/Mag1cFall/utls" // [uQUIC]
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"errors"
@@ -21,10 +21,10 @@ import (
 	"time"
 
 	"github.com/quic-go/qpack"
-	"github.com/refraction-networking/uquic"
-	"github.com/refraction-networking/uquic/http3/qlog"
-	"github.com/refraction-networking/uquic/qlogwriter"
-	"github.com/refraction-networking/uquic/quicvarint"
+	"github.com/Mag1cFall/uquic"
+	"github.com/Mag1cFall/uquic/http3/qlog"
+	"github.com/Mag1cFall/uquic/qlogwriter"
+	"github.com/Mag1cFall/uquic/quicvarint"
 
 	"github.com/stretchr/testify/require"
 )

@@ -6,10 +6,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/refraction-networking/uquic/internal/handshake"
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/wire"
-	tls "github.com/refraction-networking/utls"
+	"github.com/Mag1cFall/uquic/internal/handshake"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/wire"
+	tls "github.com/Mag1cFall/utls"
 )
 
 // dialAndCaptureFirstDatagram dials a dead UDP socket with the given spec and returns

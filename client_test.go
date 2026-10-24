@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	tls "github.com/refraction-networking/utls"
+	tls "github.com/Mag1cFall/utls"
 	"github.com/stretchr/testify/require"
 )
 

@@ -10,10 +10,10 @@ import (
 	"net/http"
 	"os"
 
-	tls "github.com/refraction-networking/utls"
+	tls "github.com/Mag1cFall/utls"
 
-	quic "github.com/refraction-networking/uquic"
-	"github.com/refraction-networking/uquic/http3"
+	quic "github.com/Mag1cFall/uquic"
+	"github.com/Mag1cFall/uquic/http3"
 )
 
 func main() {

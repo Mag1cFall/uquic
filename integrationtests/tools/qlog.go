@@ -9,11 +9,11 @@ import (
 	"os"
 	"time"
 
-	"github.com/refraction-networking/uquic"
-	h3qlog "github.com/refraction-networking/uquic/http3/qlog"
-	"github.com/refraction-networking/uquic/internal/utils"
-	"github.com/refraction-networking/uquic/qlog"
-	"github.com/refraction-networking/uquic/qlogwriter"
+	"github.com/Mag1cFall/uquic"
+	h3qlog "github.com/Mag1cFall/uquic/http3/qlog"
+	"github.com/Mag1cFall/uquic/internal/utils"
+	"github.com/Mag1cFall/uquic/qlog"
+	"github.com/Mag1cFall/uquic/qlogwriter"
 )
 
 func QlogTracer(logger io.Writer) qlogwriter.Trace {

@@ -3,7 +3,7 @@ package http3
 import (
 	"context"
 	// [uQUIC] use utls instead of crypto/tls for API compatibility
-	tls "github.com/refraction-networking/utls"
+	tls "github.com/Mag1cFall/utls"
 	"errors"
 	"fmt"
 	"io"
@@ -18,7 +18,7 @@ import (
 
 	"golang.org/x/net/http/httpguts"
 
-	"github.com/refraction-networking/uquic"
+	"github.com/Mag1cFall/uquic"
 )
 
 // Settings are HTTP/3 settings that apply to the underlying connection.

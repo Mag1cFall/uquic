@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/quicvarint"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/quicvarint"
 )
 
 // ParseConnectionID parses the destination connection ID of a packet.

@@ -7,9 +7,9 @@ import (
 	"net/textproto"
 	"time"
 
-	tls "github.com/refraction-networking/utls"
+	tls "github.com/Mag1cFall/utls"
 
-	quic "github.com/refraction-networking/uquic"
+	quic "github.com/Mag1cFall/uquic"
 )
 
 func traceGetConn(trace *httptrace.ClientTrace, hostPort string) {

@@ -3,13 +3,13 @@ package quic
 import (
 	"context"
 
-	"github.com/refraction-networking/uquic/internal/ackhandler"
-	"github.com/refraction-networking/uquic/internal/handshake"
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/utils"
-	"github.com/refraction-networking/uquic/internal/wire"
-	"github.com/refraction-networking/uquic/qlogwriter"
-	tls "github.com/refraction-networking/utls"
+	"github.com/Mag1cFall/uquic/internal/ackhandler"
+	"github.com/Mag1cFall/uquic/internal/handshake"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/utils"
+	"github.com/Mag1cFall/uquic/internal/wire"
+	"github.com/Mag1cFall/uquic/qlogwriter"
+	tls "github.com/Mag1cFall/utls"
 )
 
 // [UQUIC]
@@ -159,7 +159,7 @@ var newUClientConnection = func(
 			// different from protocol.DefaultActiveConnectionIDLimit.
 			// If set to the default value, it will be omitted from the transport parameters, which will make
 			// old quic-go versions interpret it as 0, instead of the default value of 2.
-			// See https://github.com/refraction-networking/uquic/pull/3806.
+			// See https://github.com/Mag1cFall/uquic/pull/3806.
 			ActiveConnectionIDLimit:   protocol.MaxActiveConnectionIDs,
 			InitialSourceConnectionID: srcConnID,
 		}

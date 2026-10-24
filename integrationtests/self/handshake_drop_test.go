@@ -3,7 +3,7 @@ package self_test
 import (
 	"bytes"
 	"context"
-	tls "github.com/refraction-networking/utls" // [uQUIC]
+	tls "github.com/Mag1cFall/utls" // [uQUIC]
 	"fmt"
 	"io"
 	mrand "math/rand/v2"
@@ -16,12 +16,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/refraction-networking/uquic"
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/synctest"
-	"github.com/refraction-networking/uquic/qlog"
-	"github.com/refraction-networking/uquic/testutils/events"
-	"github.com/refraction-networking/uquic/testutils/simnet"
+	"github.com/Mag1cFall/uquic"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/synctest"
+	"github.com/Mag1cFall/uquic/qlog"
+	"github.com/Mag1cFall/uquic/testutils/events"
+	"github.com/Mag1cFall/uquic/testutils/simnet"
 
 	"github.com/stretchr/testify/require"
 )

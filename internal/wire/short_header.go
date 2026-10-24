@@ -4,8 +4,8 @@ import (
 	"errors"
 	"io"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/utils"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/utils"
 )
 
 // ParseShortHeader parses a short header packet.

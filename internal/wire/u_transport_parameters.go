@@ -5,8 +5,8 @@ package wire
 import (
 	"time"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
-	tls "github.com/refraction-networking/utls"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	tls "github.com/Mag1cFall/utls"
 )
 
 // PopulateFromUQUIC sets TransportParameters fields from a uTLS TransportParameters slice

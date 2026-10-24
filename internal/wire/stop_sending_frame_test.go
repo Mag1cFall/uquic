@@ -4,8 +4,8 @@ import (
 	"io"
 	"testing"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
-	"github.com/refraction-networking/uquic/internal/qerr"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/qerr"
 
 	"github.com/stretchr/testify/require"
 )

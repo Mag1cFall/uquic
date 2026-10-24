@@ -7,7 +7,7 @@ import (
 	"hash"
 	"sync"
 
-	"github.com/refraction-networking/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/protocol"
 )
 
 type statelessResetter struct {
