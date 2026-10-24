@@ -1,14 +1,18 @@
 package quic
 
 import (
-	"bytes"
+	"cmp"
 	"crypto/rand"
 	"errors"
+	"fmt"
+	"io"
 	"math"
 	"math/big"
 	mrand "math/rand"
+	"slices"
 
-	"github.com/refraction-networking/clienthellod"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/wire"
 	"github.com/Mag1cFall/uquic/quicvarint"
 )
 
@@ -122,21 +126,58 @@ func (qfs QUICFrames) build(cryptoData []byte, baseOffset uint64) (payload []byt
 // BuildFromFrames ingests data from all input frames and returns the byte representation
 // of all frames as specified in the slice.
 func (qfs QUICFrames) BuildFromFrames(frames []byte) (payload []byte, err error) {
-	// parse frames
-	r := bytes.NewReader(frames)
-	qchframes, err := clienthellod.ReadAllFrames(r)
+	parsed, err := readInitialFrames(frames)
 	if err != nil {
 		return nil, err
 	}
-
-	// parse crypto data
-	cryptoData, err := clienthellod.ReassembleCRYPTOFrames(qchframes)
+	cryptoData, err := reassembleCryptoFrames(parsed)
 	if err != nil {
 		return nil, err
 	}
-
-	// marshal
 	return qfs.Build(cryptoData)
+}
+
+// readInitialFrames 用 uquic 的帧解析器按出现顺序读取 Initial 帧序列中的 PING 与 CRYPTO 帧，跳过 PADDING，其他帧类型返回错误 [UQUIC]
+func readInitialFrames(b []byte) ([]wire.Frame, error) {
+	parser := wire.NewFrameParser(false, false, false)
+	var frames []wire.Frame
+	for {
+		typ, l, err := parser.ParseType(b, protocol.EncryptionInitial)
+		if err == io.EOF {
+			return frames, nil
+		}
+		if err != nil {
+			return nil, err
+		}
+		if typ != wire.FrameTypePing && typ != wire.FrameTypeCrypto {
+			return nil, fmt.Errorf("unexpected frame type 0x%x in an Initial payload", uint64(typ))
+		}
+		frame, n, err := parser.ParseLessCommonFrame(typ, b[l:], protocol.Version1)
+		if err != nil {
+			return nil, err
+		}
+		frames = append(frames, frame)
+		b = b[l+n:]
+	}
+}
+
+// reassembleCryptoFrames 按偏移拼接帧序列中的 CRYPTO 数据，各帧须从最小偏移起首尾相接 [UQUIC]
+func reassembleCryptoFrames(frames []wire.Frame) ([]byte, error) {
+	var cryptoFrames []*wire.CryptoFrame
+	for _, frame := range frames {
+		if cf, ok := frame.(*wire.CryptoFrame); ok {
+			cryptoFrames = append(cryptoFrames, cf)
+		}
+	}
+	slices.SortStableFunc(cryptoFrames, func(a, b *wire.CryptoFrame) int { return cmp.Compare(a.Offset, b.Offset) })
+	var data []byte
+	for _, cf := range cryptoFrames {
+		if cf.Offset != cryptoFrames[0].Offset+protocol.ByteCount(len(data)) {
+			return nil, errors.New("CRYPTO frames do not form a contiguous range")
+		}
+		data = append(data, cf.Data...)
+	}
+	return data, nil
 }
 
 // QUICFrame is the interface for all QUIC frames to be included in the Initial Packet.

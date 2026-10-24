@@ -1,12 +1,10 @@
 package quic
 
 import (
-	"bytes"
 	"errors"
 	"fmt"
 	"math"
 
-	"github.com/refraction-networking/clienthellod"
 	"github.com/Mag1cFall/uquic/internal/ackhandler"
 	"github.com/Mag1cFall/uquic/internal/handshake"
 	"github.com/Mag1cFall/uquic/internal/monotime"
@@ -392,19 +390,20 @@ func validateInitialFlight(payloads [][]byte, budgets []InitialDatagramBudget, c
 		if budget > 0 && len(uPayload) > budget {
 			return fmt.Errorf("uquic: BuildFlight: Initial datagram %d is %d bytes of frames, %d more than fits in the packet", i, len(uPayload), len(uPayload)-budget)
 		}
-		frames, err := clienthellod.ReadAllFrames(bytes.NewReader(uPayload))
+		frames, err := readInitialFrames(uPayload)
 		if err != nil {
 			return fmt.Errorf("uquic: BuildFlight: Initial datagram %d does not parse as QUIC frames: %w", i, err)
 		}
 		for _, frame := range frames {
-			cf, ok := frame.(*clienthellod.CRYPTO)
+			cf, ok := frame.(*wire.CryptoFrame)
 			if !ok {
 				continue
 			}
-			if cf.Offset+cf.Length > uint64(cryptoLen) {
-				return fmt.Errorf("uquic: BuildFlight: Initial datagram %d has a CRYPTO frame covering [%d,%d) of a %d byte CRYPTO stream", i, cf.Offset, cf.Offset+cf.Length, cryptoLen)
+			end := int(cf.Offset) + len(cf.Data)
+			if end > cryptoLen {
+				return fmt.Errorf("uquic: BuildFlight: Initial datagram %d has a CRYPTO frame covering [%d,%d) of a %d byte CRYPTO stream", i, cf.Offset, end, cryptoLen)
 			}
-			for j := cf.Offset; j < cf.Offset+cf.Length; j++ {
+			for j := int(cf.Offset); j < end; j++ {
 				sent[j] = true
 			}
 		}
@@ -477,21 +476,18 @@ func (p *uPacketPacker) packPlannedInitial(sealer sealer, release bool, maxSize 
 // stream ranges this datagram carried rather than the contiguous slice the packer would
 // otherwise have popped for it. [UQUIC]
 func (p *uPacketPacker) plannedInitialPayload(uPayload []byte, v protocol.Version) (payload, error) {
-	frames, err := clienthellod.ReadAllFrames(bytes.NewReader(uPayload))
+	frames, err := readInitialFrames(uPayload)
 	if err != nil { // already validated in planInitialFlight, so this is a uQUIC bug
 		return payload{}, fmt.Errorf("uquic: planned Initial payload does not parse as QUIC frames: %w", err)
 	}
 	handler := p.retransmissionQueue.AckHandler(protocol.EncryptionInitial)
 	pl := payload{length: protocol.ByteCount(len(uPayload))}
 	for _, frame := range frames {
-		cf, ok := frame.(*clienthellod.CRYPTO)
+		cf, ok := frame.(*wire.CryptoFrame)
 		if !ok {
 			continue
 		}
-		pl.frames = append(pl.frames, ackhandler.Frame{
-			Frame:   &wire.CryptoFrame{Offset: protocol.ByteCount(cf.Offset), Data: cf.Data()},
-			Handler: handler,
-		})
+		pl.frames = append(pl.frames, ackhandler.Frame{Frame: cf, Handler: handler})
 	}
 	return pl, nil
 }
@@ -530,15 +526,11 @@ func (p *uPacketPacker) MarshalInitialPacketPayload(pl payload, v protocol.Versi
 	}
 
 	// extract CryptoData from originalFrameBytes
-	// parse frames
-	r := bytes.NewReader(originalFrameBytes)
-	qchframes, err := clienthellod.ReadAllFrames(r)
+	qchframes, err := readInitialFrames(originalFrameBytes)
 	if err != nil {
 		return nil, err
 	}
-
-	// parse crypto data
-	cryptoData, err := clienthellod.ReassembleCRYPTOFrames(qchframes)
+	cryptoData, err := reassembleCryptoFrames(qchframes)
 	if err != nil {
 		return nil, err
 	}
@@ -551,8 +543,8 @@ func (p *uPacketPacker) MarshalInitialPacketPayload(pl payload, v protocol.Versi
 	// offsets are correct for all N datagrams.
 	var baseOffset uint64 = math.MaxUint64
 	for _, frame := range qchframes {
-		if cf, ok := frame.(*clienthellod.CRYPTO); ok && cf.Offset < baseOffset {
-			baseOffset = cf.Offset
+		if cf, ok := frame.(*wire.CryptoFrame); ok && uint64(cf.Offset) < baseOffset {
+			baseOffset = uint64(cf.Offset)
 		}
 	}
 	if baseOffset == math.MaxUint64 {
@@ -563,8 +555,8 @@ func (p *uPacketPacker) MarshalInitialPacketPayload(pl payload, v protocol.Versi
 	if qf, ok := p.uSpec.InitialPacketSpec.FrameBuilder.(QUICFrames); p.uSpec.InitialPacketSpec.FrameBuilder == nil || ok && len(qf) == 0 {
 		qfs := QUICFrames{}
 		for _, frame := range qchframes {
-			if cryptoFrame, ok := frame.(*clienthellod.CRYPTO); ok {
-				qfs = append(qfs, QUICFrameCrypto{int(cryptoFrame.Offset), int(cryptoFrame.Length)})
+			if cryptoFrame, ok := frame.(*wire.CryptoFrame); ok {
+				qfs = append(qfs, QUICFrameCrypto{int(cryptoFrame.Offset), len(cryptoFrame.Data)})
 			}
 		}
 		return qfs.Build(cryptoData)

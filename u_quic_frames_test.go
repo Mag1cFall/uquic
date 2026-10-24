@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/refraction-networking/clienthellod"
+	"github.com/Mag1cFall/uquic/internal/wire"
 )
 
 func TestQUICFrames(t *testing.T) {
@@ -18,13 +18,12 @@ func TestQUICFrames(t *testing.T) {
 	}
 
 	// verify that the crypto frames would actually assemble the original crypto data
-	r := bytes.NewReader(resultQUICPayload)
-	qchframes, err := clienthellod.ReadAllFrames(r)
+	qchframes, err := readInitialFrames(resultQUICPayload)
 	if err != nil {
 		t.Fatalf("Failed to read QUIC frames: %v", err)
 	}
 
-	reassembledCryptoData, err := clienthellod.ReassembleCRYPTOFrames(qchframes)
+	reassembledCryptoData, err := reassembleCryptoFrames(qchframes)
 	if err != nil {
 		t.Fatalf("Failed to reassemble crypto data: %v", err)
 	}
@@ -44,13 +43,12 @@ func TestQUICRandomFrames(t *testing.T) {
 	}
 
 	// verify that the crypto frames would actually assemble the original crypto data
-	r := bytes.NewReader(resultQUICPayload)
-	qchframes, err := clienthellod.ReadAllFrames(r)
+	qchframes, err := readInitialFrames(resultQUICPayload)
 	if err != nil {
 		t.Fatalf("Failed to read QUIC frames: %v", err)
 	}
 
-	reassembledCryptoData, err := clienthellod.ReassembleCRYPTOFrames(qchframes)
+	reassembledCryptoData, err := reassembleCryptoFrames(qchframes)
 	if err != nil {
 		t.Fatalf("Failed to reassemble crypto data: %v", err)
 	}
@@ -61,10 +59,10 @@ func TestQUICRandomFrames(t *testing.T) {
 	// count how many PING and CRYPTO frames are in the QUIC payload
 	var pingCount, cryptoCount int
 	for _, frame := range qchframes {
-		switch frame.FrameType() {
-		case clienthellod.QUICFrame_PING:
+		switch frame.(type) {
+		case *wire.PingFrame:
 			pingCount++
-		case clienthellod.QUICFrame_CRYPTO:
+		case *wire.CryptoFrame:
 			cryptoCount++
 		}
 	}
@@ -133,12 +131,12 @@ func TestQUICRandomFramesMoreCRYPTOFramesThanBytes(t *testing.T) {
 		t.Fatalf("Failed to build QUIC frames: %v", err)
 	}
 
-	qchframes, err := clienthellod.ReadAllFrames(bytes.NewReader(resultQUICPayload))
+	qchframes, err := readInitialFrames(resultQUICPayload)
 	if err != nil {
 		t.Fatalf("Failed to read QUIC frames: %v", err)
 	}
 
-	reassembledCryptoData, err := clienthellod.ReassembleCRYPTOFrames(qchframes)
+	reassembledCryptoData, err := reassembleCryptoFrames(qchframes)
 	if err != nil {
 		t.Fatalf("Failed to reassemble crypto data: %v", err)
 	}
@@ -148,7 +146,7 @@ func TestQUICRandomFramesMoreCRYPTOFramesThanBytes(t *testing.T) {
 
 	var cryptoCount int
 	for _, frame := range qchframes {
-		if frame.FrameType() == clienthellod.QUICFrame_CRYPTO {
+		if _, ok := frame.(*wire.CryptoFrame); ok {
 			cryptoCount++
 		}
 	}
@@ -251,3 +249,17 @@ var (
 		Length:     512,
 	}
 )
+
+// TestReassembleCryptoFrames 验证 CRYPTO 帧按偏移拼接，帧之间有空缺时返回错误
+func TestReassembleCryptoFrames(t *testing.T) {
+	head := &wire.CryptoFrame{Offset: 100, Data: []byte("ab")}
+	tail := &wire.CryptoFrame{Offset: 102, Data: []byte("cd")}
+	data, err := reassembleCryptoFrames([]wire.Frame{tail, &wire.PingFrame{}, head})
+	if err != nil || string(data) != "abcd" {
+		t.Fatalf("reassembleCryptoFrames = %q, %v; want \"abcd\"", data, err)
+	}
+	gap := &wire.CryptoFrame{Offset: 105, Data: []byte("ef")}
+	if _, err := reassembleCryptoFrames([]wire.Frame{head, tail, gap}); err == nil {
+		t.Fatal("reassembleCryptoFrames accepted a gap between CRYPTO frames")
+	}
+}

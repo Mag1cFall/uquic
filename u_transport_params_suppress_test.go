@@ -3,9 +3,7 @@ package quic
 import (
 	"slices"
 	"testing"
-	"time"
 
-	"github.com/refraction-networking/clienthellod"
 	tls "github.com/Mag1cFall/utls"
 )
 
@@ -16,31 +14,20 @@ const (
 )
 
 // wireTransportParameterIDs dials with the spec, reassembles the ClientHello out of the
-// Initial flight exactly as a QUIC fingerprinter does, and returns the sorted transport
-// parameter IDs actually observed in the quic_transport_parameters extension.
+// Initial flight, and returns the transport parameter IDs observed in the
+// quic_transport_parameters extension the way a QUIC fingerprinter records them: every
+// GREASE ID folded to QTPGrease, sorted, duplicates kept.
 func wireTransportParameterIDs(t *testing.T, spec *QUICSpec) []uint64 {
 	t.Helper()
 
-	// GatherClientInitials leaves the deadline at the zero time, i.e. already expired.
-	gci := clienthellod.GatherClientInitialsWithDeadline(time.Now().Add(time.Minute))
-	dialAndCaptureDatagrams(t, spec, func(datagram []byte) bool {
-		ci, err := clienthellod.UnmarshalQUICClientInitialPacket(datagram)
-		if err != nil {
-			t.Fatalf("parsing a client Initial: %v", err)
+	ids := rawWireTransportParameterIDs(t, spec)
+	for i, id := range ids {
+		if IsGREASEQTPID(id) {
+			ids[i] = QTPGrease
 		}
-		if err := gci.AddPacket(ci); err != nil {
-			t.Fatalf("gathering client Initials: %v", err)
-		}
-		return !gci.Completed()
-	})
-
-	if gci.TransportParameters == nil {
-		t.Fatal("no quic_transport_parameters extension in the reassembled ClientHello")
 	}
-	if err := gci.TransportParameters.ParseError(); err != nil {
-		t.Fatalf("parsing the transport parameters: %v", err)
-	}
-	return gci.TransportParameters.QTPIDs
+	slices.Sort(ids)
+	return ids
 }
 
 // specTransportParameterIDs returns the sorted, deduplicated canonical IDs the spec's

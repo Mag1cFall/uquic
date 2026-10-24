@@ -3,9 +3,7 @@ package quic
 import (
 	"encoding/binary"
 	"testing"
-	"time"
 
-	"github.com/refraction-networking/clienthellod"
 	"github.com/Mag1cFall/uquic/quicvarint"
 	tls "github.com/Mag1cFall/utls"
 )
@@ -22,22 +20,7 @@ func wireVersionInformation(t *testing.T, spec *QUICSpec) []uint32 {
 		versionInformationLegacyID uint64 = 0xff73db
 	)
 
-	gci := clienthellod.GatherClientInitialsWithDeadline(time.Now().Add(time.Minute))
-	dialAndCaptureDatagrams(t, spec, func(datagram []byte) bool {
-		ci, err := clienthellod.UnmarshalQUICClientInitialPacket(datagram)
-		if err != nil {
-			t.Fatalf("parsing a client Initial: %v", err)
-		}
-		if err := gci.AddPacket(ci); err != nil {
-			t.Fatalf("gathering client Initials: %v", err)
-		}
-		return !gci.Completed()
-	})
-	if gci.ClientHello == nil {
-		t.Fatal("no ClientHello reassembled from the Initial flight")
-	}
-
-	body := clientHelloExtension(t, gci.ClientHello.Raw(), quicTransportParametersExtensionID)
+	body := clientHelloExtension(t, captureClientHello(t, spec), quicTransportParametersExtensionID)
 	for len(body) > 0 {
 		id, n, err := quicvarint.Parse(body)
 		if err != nil {

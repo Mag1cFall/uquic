@@ -7,7 +7,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/refraction-networking/clienthellod"
 	"github.com/Mag1cFall/uquic/internal/handshake"
 	"github.com/Mag1cFall/uquic/internal/monotime"
 	"github.com/Mag1cFall/uquic/internal/protocol"
@@ -82,14 +81,22 @@ func parseInitialDatagram(t *testing.T, data []byte) sentDatagram {
 	// The mock sealer appends its overhead to the payload instead of encrypting it.
 	payload := data[hdrLen : packetLen-7]
 
-	frames, err := clienthellod.ReadAllFrames(bytes.NewReader(payload))
+	frames, err := readInitialFrames(payload)
 	require.NoError(t, err)
 	dg := sentDatagram{packetSize: int(packetLen)}
+	frameBytes := 0
 	for _, f := range frames {
-		dg.frameTypes = append(dg.frameTypes, f.FrameType())
-		if cf, ok := f.(*clienthellod.CRYPTO); ok {
-			dg.crypto = append(dg.crypto, sentCrypto{offset: int(cf.Offset), length: int(cf.Length)})
+		frameBytes += int(f.Length(protocol.Version1))
+		switch f := f.(type) {
+		case *wire.PingFrame:
+			dg.frameTypes = append(dg.frameTypes, uint64(wire.FrameTypePing))
+		case *wire.CryptoFrame:
+			dg.frameTypes = append(dg.frameTypes, uint64(wire.FrameTypeCrypto))
+			dg.crypto = append(dg.crypto, sentCrypto{offset: int(f.Offset), length: len(f.Data)})
 		}
+	}
+	if frameBytes < len(payload) && !bytes.ContainsFunc(payload[frameBytes:], func(r rune) bool { return r != 0 }) {
+		dg.frameTypes = append(dg.frameTypes, 0x00)
 	}
 	return dg
 }

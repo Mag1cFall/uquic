@@ -4,9 +4,10 @@ import (
 	"encoding/binary"
 	"slices"
 	"testing"
-	"time"
 
-	"github.com/refraction-networking/clienthellod"
+	"github.com/Mag1cFall/uquic/internal/handshake"
+	"github.com/Mag1cFall/uquic/internal/protocol"
+	"github.com/Mag1cFall/uquic/internal/wire"
 	"github.com/Mag1cFall/uquic/quicvarint"
 	tls "github.com/Mag1cFall/utls"
 )
@@ -17,29 +18,13 @@ const quicTransportParametersExtensionID = 57
 // IDs from the ClientHello's quic_transport_parameters extension exactly as they appear
 // on the wire: in order, unsorted, and with GREASE IDs left at their real values.
 //
-// wireTransportParameterIDs (u_transport_params_suppress_test.go) goes through
-// clienthellod, which sorts and folds every GREASE ID to 27 the way a fingerprinter does.
-// That is the right view for fingerprint comparisons but useless for checking which
-// literal ID reached the wire, or in what order.
+// wireTransportParameterIDs (u_transport_params_suppress_test.go) sorts and folds every
+// GREASE ID to 27 the way a fingerprinter does. That is the right view for fingerprint
+// comparisons but useless for checking which literal ID reached the wire, or in what order.
 func rawWireTransportParameterIDs(t *testing.T, spec *QUICSpec) []uint64 {
 	t.Helper()
 
-	gci := clienthellod.GatherClientInitialsWithDeadline(time.Now().Add(time.Minute))
-	dialAndCaptureDatagrams(t, spec, func(datagram []byte) bool {
-		ci, err := clienthellod.UnmarshalQUICClientInitialPacket(datagram)
-		if err != nil {
-			t.Fatalf("parsing a client Initial: %v", err)
-		}
-		if err := gci.AddPacket(ci); err != nil {
-			t.Fatalf("gathering client Initials: %v", err)
-		}
-		return !gci.Completed()
-	})
-	if gci.ClientHello == nil {
-		t.Fatal("no ClientHello reassembled from the Initial flight")
-	}
-
-	ext := clientHelloExtension(t, gci.ClientHello.Raw(), quicTransportParametersExtensionID)
+	ext := clientHelloExtension(t, captureClientHello(t, spec), quicTransportParametersExtensionID)
 	var ids []uint64
 	for len(ext) > 0 {
 		id, n, err := quicvarint.Parse(ext)
@@ -59,6 +44,53 @@ func rawWireTransportParameterIDs(t *testing.T, spec *QUICSpec) []uint64 {
 		ids = append(ids, id)
 	}
 	return ids
+}
+
+// captureClientHello 以 spec 拨号，按服务端视角解开 Initial 数据报的头部保护与加密并重组 CRYPTO 流，返回完整的 ClientHello 握手消息
+func captureClientHello(t *testing.T, spec *QUICSpec) []byte {
+	t.Helper()
+
+	var opener handshake.LongHeaderOpener
+	var frames []wire.Frame
+	var clientHello []byte
+	dialAndCaptureDatagrams(t, spec, func(datagram []byte) bool {
+		hdr, packet, _, err := wire.ParsePacket(datagram)
+		if err != nil {
+			t.Fatalf("parsing a client Initial: %v", err)
+		}
+		if hdr.Type != protocol.PacketTypeInitial {
+			return true
+		}
+		if opener == nil {
+			_, opener = handshake.NewInitialAEAD(hdr.DestConnectionID, protocol.PerspectiveServer, hdr.Version)
+		}
+		_, payload, err := (&packetUnpacker{}).unpackLongHeaderPacket(opener, hdr, packet)
+		if err != nil {
+			t.Fatalf("decrypting a client Initial: %v", err)
+		}
+		parsed, err := readInitialFrames(payload)
+		if err != nil {
+			t.Fatalf("parsing the frames of a client Initial: %v", err)
+		}
+		frames = append(frames, parsed...)
+		data, err := reassembleCryptoFrames(frames)
+		if err != nil || len(data) < 4 || !slices.ContainsFunc(frames, func(f wire.Frame) bool {
+			cf, ok := f.(*wire.CryptoFrame)
+			return ok && cf.Offset == 0
+		}) {
+			return true
+		}
+		length := 4 + (int(data[1])<<16 | int(data[2])<<8 | int(data[3]))
+		if len(data) < length {
+			return true
+		}
+		clientHello = data[:length]
+		return false
+	})
+	if clientHello == nil {
+		t.Fatal("no ClientHello reassembled from the Initial flight")
+	}
+	return clientHello
 }
 
 // clientHelloExtension returns the body of the given extension in a raw ClientHello
