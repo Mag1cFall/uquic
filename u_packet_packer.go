@@ -74,7 +74,7 @@ func (p *uPacketPacker) PackCoalescedPacket(onlyAck bool, maxSize protocol.ByteC
 			return nil, err
 		}
 		if len(p.flightPayloads) > 0 {
-			return p.packPlannedInitial(initialSealer, v)
+			return p.packPlannedInitial(initialSealer, false, maxSize, now, v)
 		}
 	}
 	if initialSealer != nil {
@@ -417,11 +417,20 @@ func validateInitialFlight(payloads [][]byte, budgets []InitialDatagramBudget, c
 	return nil
 }
 
-// packPlannedInitial serializes the next Initial datagram of a pre-planned flight. Such
-// a datagram is never coalesced with anything else: the flight builder owns its entire
-// frame payload, and no later encryption level is available while the Initial flight is
-// still going out. [UQUIC]
-func (p *uPacketPacker) packPlannedInitial(sealer sealer, v protocol.Version) (*coalescedPacket, error) {
+// packPlannedInitial serializes the next Initial datagram of a pre-planned flight. When
+// the client resumes with 0-RTT, the last datagram of the flight waits until the
+// application has queued stream data and carries the first 0-RTT packet after its
+// Initial packet, as neqo does; release sends it without waiting. [UQUIC]
+func (p *uPacketPacker) packPlannedInitial(sealer sealer, release bool, maxSize protocol.ByteCount, now monotime.Time, v protocol.Version) (*coalescedPacket, error) {
+	var zeroRTTSealer handshake.LongHeaderSealer
+	if len(p.flightPayloads) == 1 && p.perspective == protocol.PerspectiveClient {
+		zeroRTTSealer, _ = p.cryptoSetup.Get0RTTSealer()
+	}
+	if zeroRTTSealer != nil && !release {
+		if f, ok := p.framer.(*framer); ok && !f.hasStreamData() {
+			return nil, nil
+		}
+	}
 	uPayload := p.flightPayloads[0]
 	p.flightPayloads = p.flightPayloads[1:]
 	idx := p.initialDatagramIdx
@@ -437,7 +446,30 @@ func (p *uPacketPacker) packPlannedInitial(sealer sealer, v protocol.Version) (*
 		buffer.Release()
 		return nil, err
 	}
-	return &coalescedPacket{buffer: buffer, longHdrPackets: []*longHeaderPacket{pkt}}, nil
+	packet := &coalescedPacket{buffer: buffer, longHdrPackets: []*longHeaderPacket{pkt}}
+	if zeroRTTSealer == nil {
+		return packet, nil
+	}
+	datagram := len(buffer.Data)
+	if datagram < int(maxSize) {
+		datagram = int(maxSize)
+	}
+	hdr, zeroRTT := p.maybeGetAppDataPacketFor0RTT(zeroRTTSealer, protocol.ByteCount(datagram)-pkt.length, now, v)
+	if zeroRTT.length == 0 {
+		return packet, nil
+	}
+	padded := len(buffer.Data)
+	buffer.Data = buffer.Data[:pkt.length]
+	zeroRTTPacket, err := p.appendLongHeaderPacket(buffer, hdr, zeroRTT, 0, protocol.Encryption0RTT, zeroRTTSealer, v)
+	if err != nil {
+		buffer.Release()
+		return nil, err
+	}
+	packet.longHdrPackets = append(packet.longHdrPackets, zeroRTTPacket)
+	if len(buffer.Data) < padded {
+		buffer.Data = append(buffer.Data, make([]byte, padded-len(buffer.Data))...)
+	}
+	return packet, nil
 }
 
 // plannedInitialPayload reads the CRYPTO frames back out of a planned payload and
@@ -576,6 +608,9 @@ func (p *uPacketPacker) PackPTOProbePacket(
 		}
 	default:
 		panic("unknown encryption level")
+	}
+	if encLevel == protocol.EncryptionInitial && len(p.flightPayloads) > 0 {
+		return p.packPlannedInitial(sealer, true, maxPacketSize, now, v)
 	}
 	hdr, pl := p.maybeGetCryptoPacket(maxPacketSize-protocol.ByteCount(sealer.Overhead()), encLevel, now, addPingIfEmpty, false, v)
 	if pl.length == 0 {

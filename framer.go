@@ -64,6 +64,13 @@ func (f *framer) HasData() bool {
 	return len(f.streamsWithControlFrames) > 0 || len(f.controlFrames) > 0 || len(f.pathResponses) > 0
 }
 
+// hasStreamData 报告是否有流排队等待发送 [UQUIC]
+func (f *framer) hasStreamData() bool {
+	f.mutex.Lock()
+	defer f.mutex.Unlock()
+	return !f.streamQueue.Empty()
+}
+
 func (f *framer) QueueControlFrame(frame wire.Frame) {
 	f.controlFrameMutex.Lock()
 	defer f.controlFrameMutex.Unlock()
