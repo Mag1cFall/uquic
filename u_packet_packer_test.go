@@ -4,9 +4,31 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/Mag1cFall/uquic/internal/monotime"
 	"github.com/Mag1cFall/uquic/internal/protocol"
 	"github.com/Mag1cFall/uquic/internal/wire"
+	"github.com/stretchr/testify/require"
+	"go.uber.org/mock/gomock"
 )
+
+// TestUPack1RTTProbePacketPing 验证 1-RTT PTO 没有可重传数据时探测包是一个 PING
+func TestUPack1RTTProbePacketPing(t *testing.T) {
+	mockCtrl := gomock.NewController(t)
+	tp := newTestPacketPacker(t, mockCtrl, protocol.PerspectiveClient)
+	packer := &uPacketPacker{packetPacker: tp.packer}
+	tp.sealingManager.EXPECT().Get1RTTSealer().Return(newMockShortHeaderSealer(mockCtrl), nil)
+	tp.framer.EXPECT().HasData()
+	tp.pnManager.EXPECT().PeekPacketNumber(protocol.Encryption1RTT).Return(protocol.PacketNumber(0x42), protocol.PacketNumberLen2)
+	tp.pnManager.EXPECT().PopPacketNumber(protocol.Encryption1RTT).Return(protocol.PacketNumber(0x42))
+	tp.ackFramer.EXPECT().GetAckFrame(protocol.Encryption1RTT, gomock.Any(), true)
+
+	packet, err := packer.PackPTOProbePacket(protocol.Encryption1RTT, 1234, true, monotime.Now(), protocol.Version1)
+	require.NoError(t, err)
+	require.NotNil(t, packet)
+	require.NotNil(t, packet.shortHdrPacket)
+	require.Len(t, packet.shortHdrPacket.Frames, 1)
+	require.Equal(t, &wire.PingFrame{}, packet.shortHdrPacket.Frames[0].Frame)
+}
 
 // uTestSealer is a no-op sealer: these tests only exercise packet sizing, so all that
 // matters is Overhead(). Seal writes nothing, which is fine because encryptPacket
