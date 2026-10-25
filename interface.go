@@ -167,7 +167,7 @@ type Config struct {
 	// If set to 0, then no keep alive is sent. Otherwise, the keep alive is sent on that period (or at most
 	// every half of MaxIdleTimeout, whichever is smaller).
 	KeepAlivePeriod time.Duration
-	// KeepAliveStreamsOnly 为 true 时只在本端打开的双向流尚未完成时发送保活 PING
+	// KeepAliveStreamsOnly 为 true 时按 neqo 保活：只在本端打开的双向流尚未完成且没有待发数据时，自空闲计时起点经过保活间隔后发送 PING
 	KeepAliveStreamsOnly bool
 	// InitialPacketSize is the initial size (and the lower limit) for packets sent.
 	// Under most circumstances, it is not necessary to manually set this value,

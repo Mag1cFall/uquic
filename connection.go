@@ -856,10 +856,13 @@ func (c *Conn) nextKeepAliveTime() monotime.Time {
 	if c.config.KeepAlivePeriod == 0 || c.keepAlivePingSent {
 		return 0
 	}
-	if c.config.KeepAliveStreamsOnly && !c.streamsMap.hasOutgoingBidiStreams() {
-		return 0
-	}
 	keepAliveInterval := max(c.keepAliveInterval, c.rttStats.PTO(true)*3/2)
+	if c.config.KeepAliveStreamsOnly {
+		if !c.streamsMap.hasOutgoingBidiStreams() || c.framer.HasData() {
+			return 0
+		}
+		return c.idleTimeoutStartTime().Add(keepAliveInterval)
+	}
 	return c.lastPacketReceivedTime.Add(keepAliveInterval)
 }
 
