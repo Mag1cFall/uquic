@@ -165,6 +165,13 @@ func (m *outgoingStreamsMap[T]) GetStream(id protocol.StreamID) (T, error) {
 	return s, nil
 }
 
+// Len 返回尚未完成的流数量
+func (m *outgoingStreamsMap[T]) Len() int {
+	m.mutex.RLock()
+	defer m.mutex.RUnlock()
+	return len(m.streams)
+}
+
 func (m *outgoingStreamsMap[T]) DeleteStream(id protocol.StreamID) error {
 	m.mutex.Lock()
 	defer m.mutex.Unlock()

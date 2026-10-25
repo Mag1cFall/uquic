@@ -164,6 +164,11 @@ func (m *streamsMap) AcceptUniStream(ctx context.Context) (*ReceiveStream, error
 	return mm.AcceptStream(ctx)
 }
 
+// hasOutgoingBidiStreams 报告本端打开的双向流中是否有尚未完成的流
+func (m *streamsMap) hasOutgoingBidiStreams() bool {
+	return m.outgoingBidiStreams.Len() > 0
+}
+
 func (m *streamsMap) DeleteStream(id protocol.StreamID) error {
 	switch id.Type() {
 	case protocol.StreamTypeUni:
